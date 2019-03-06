@@ -1,0 +1,13 @@
+---
+- name: Gather facts for EC2 instances
+  hosts: localhost
+  tasks:
+   - name: Module to gather facts
+     ec2_instance_facts:
+      aws_access_key: AKIAJJZ5O7BF47FIRTBA
+      aws_secret_key: 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
+      region: ap-south-1
+      filters:
+         availability-zone: ap-south-1b
+   
+

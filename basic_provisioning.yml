@@ -1,0 +1,22 @@
+---
+- name: basic provisioning
+  hosts: localhost
+  vars:
+     region: ap-south-1
+  tasks:
+   - name: ec2 instance creation
+     ec2:
+       key_name: sheo
+       instance_type: t2.micro
+       image: ami-03103e7ded4c02ef8
+       wait: yes
+       wait_timeout: 100
+       count: 1
+       instance_tags:
+            Name: Ansible-Node-1
+       vpc_subnet_id: subnet-01fe8285de286bc17
+       assign_public_ip: yes
+       region: "{{ region }}"
+   - name: debugging instance id
+     debug:
+         var: instance_ids

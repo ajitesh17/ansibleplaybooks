@@ -1,0 +1,9 @@
+---
+- name: installing git
+  hosts: localhost
+  become: yes
+  tasks:
+   - name: git package installation
+     yum:
+       name: git
+       state: latest 

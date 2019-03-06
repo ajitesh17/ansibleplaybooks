@@ -1,0 +1,8 @@
+---
+- name: Checking connectivity using ping command
+  hosts: all
+  become_user: ec2-user
+  become_method: su
+  tasks:
+   - name: checking connectivity using ping command
+     ping:

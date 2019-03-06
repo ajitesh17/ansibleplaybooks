@@ -1,0 +1,19 @@
+---
+- name: Stop EC2 instances
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  vars:
+    instance_ids:
+      - 'i-03d2ac09374101a9f'
+      - 'i-03d2ac09374101a9f'
+    region: ap-south-1
+  tasks:
+    - name: Stop the sandbox instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: absent
+        wait: True
+        vpc_subnet_id: subnet-01fe8285de286bc17
+      register: ec2
