@@ -1,0 +1,24 @@
+---
+- name: Sonarqube setup and start
+  hosts: managednodes
+  become_method: sudo
+  become: yes
+  tasks:
+     - name: installing wget and unzip
+       file:
+          path: /opt/sonarqube-7.6
+          state: absent
+
+     - name: Extracting downloaded sonarqube zip
+       unarchive:
+           src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+           dest: /opt
+           remote_src: yes
+           owner: ansadmin
+
+     - name: Starting Sonarqube
+       command: /opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh start
+       become_user: ansadmin
+      
+     - name: Waiting for tomcat to come up on port 9000
+       wait_for: host=0.0.0.0 port=9000

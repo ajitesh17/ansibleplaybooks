@@ -1,0 +1,31 @@
+---
+- name: Maven setup
+  hosts: managednodes
+  become_method: sudo
+  become: yes
+  tasks:
+     - name: Removing older version of maven
+       file:
+          path: /opt/maven
+          state: absent
+     
+     - name: Creating maven installation directory
+       file:
+         path: /opt/maven
+         state: directory
+         mode: 0777
+         owner: ansadmin
+
+     - name: Extracting downloaded apache maven tar.gz
+       unarchive:
+           src: https://www-eu.apache.org/dist/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
+           dest: /opt/maven
+           remote_src: yes
+           extra_opts: [--strip-components=1]
+     - name: Template a file to maven conf
+       template:
+           src: settings.xml.j2
+           dest: /opt/maven/conf/settings.xml
+           owner: ansadmin
+           group: ansadmin
+           mode: '0775'

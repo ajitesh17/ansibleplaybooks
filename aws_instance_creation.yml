@@ -1,0 +1,22 @@
+---
+- name: AWS instance creation
+  hosts: localhost
+  vars:
+    key_name: Patna
+  tasks:
+  - name:  include_vars
+    include_vars:
+       file: filename.yml
+  - name: AWS instance creation
+    ec2:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
+      key_name: "{{key_name}}"
+      instance_type: t2.small
+      image: ami-0a74bfeb190bd404f
+      wait: yes
+      group: Mumbai
+      count: 1
+      vpc_subnet_id: subnet-0519b922fc7dccdff
+      assign_public_ip: yes
+      region: ap-south-1

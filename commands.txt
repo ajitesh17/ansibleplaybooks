@@ -1,0 +1,4 @@
+ansible-playbook tomcat.yml --extra-vars "variable_host=managednodes"
+ansible-playbook tomcat.yml
+ansible managednodes -m setup -a 'filter=ansible_facts['ansible_all_ipv4_addresses']'
+ansible managednodes -m setup -a 'filter=ansible_all_ipv4_addresses'
