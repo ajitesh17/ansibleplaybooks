@@ -1,6 +1,6 @@
 ---
 - name: Maven setup
-  hosts: managednodes
+  hosts: medium
   become_method: sudo
   become: yes
   tasks:
@@ -14,7 +14,7 @@
          path: /opt/maven
          state: directory
          mode: 0777
-         owner: ansadmin
+         owner: jenkins
 
      - name: Extracting downloaded apache maven tar.gz
        unarchive:
@@ -26,6 +26,6 @@
        template:
            src: settings.xml.j2
            dest: /opt/maven/conf/settings.xml
-           owner: ansadmin
-           group: ansadmin
+           owner: jenkins
+           group: jenkins
            mode: '0775'

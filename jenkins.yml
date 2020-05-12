@@ -1,6 +1,6 @@
 ---
 - name: Jenkins Installation
-  hosts: managednodes
+  hosts: medium
   become: yes
   become_method: sudo
   vars:
@@ -26,8 +26,6 @@
       yum:
         name: jenkins
         state: present
-      notify:
-        - start jenkins
 
     - name: enable jenkins
       systemd:
@@ -51,10 +49,5 @@
       debug:
          var: result.stdout
 
-#  handlers:
-#   - name: start jenkins
-#     systemd:
-#       name: jenkins
-#       state: started
 
 
