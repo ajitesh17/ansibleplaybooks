@@ -1,0 +1,11 @@
+---
+- name: Uptime of the server
+  hosts: all
+  become: yes
+  tasks:
+    - name: uptime
+      command: uptime
+      register: result
+    - name: debugging
+      debug:
+       var: result

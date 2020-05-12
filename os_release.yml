@@ -1,0 +1,14 @@
+---
+- name: OS version
+  hosts: all
+  become: yes
+  tasks:
+    - name: os version
+      command: lsb_release -a
+      register: result
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: debugging
+      debug:
+        var: result
+      
+   

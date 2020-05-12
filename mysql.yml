@@ -1,0 +1,29 @@
+---
+- name: Installing and activating mysql
+  hosts: managed
+  become: yes
+  tasks:
+    - name: Installing mysql
+      apt:
+         update_cache: yes
+         name: mysql-server
+         state: present
+      register: ubuntu
+      when: ansible_os_family == 'Debian'
+      notify:
+        - start mysql
+    - name: Installing Mysql on Redhat
+      yum:
+        name: mysql-server
+        state: latest
+      register: rhel
+      when: ansible_os_family == 'RedHat'
+      notify:
+        - start mysql
+
+
+  handlers:
+      - name: start mysql
+        service:
+             name: mysql
+             state: started        

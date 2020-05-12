@@ -1,0 +1,9 @@
+---
+- name: creating directory
+  hosts: all
+  become: yes
+  tasks:
+    - name: crating folder
+      command:
+           chdir: /home/ubuntu
+           creates: /home/ubuntu/phenomenal

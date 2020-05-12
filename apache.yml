@@ -1,0 +1,6 @@
+---
+- name: installing apache web server
+  hosts: managednodes
+  become: yes
+  roles:
+   - apache

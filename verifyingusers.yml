@@ -1,0 +1,12 @@
+---
+- name: Play to verify users created
+  hosts: all
+  become: yes
+  tasks:
+    - name: verifying user ids
+      shell: id Ajiteshkumar
+      register: result
+
+    - name: debugging
+      debug:
+        var: result 

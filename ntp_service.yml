@@ -1,0 +1,13 @@
+---
+- name: Configuring NTP service
+  hosts: all
+  become: yes
+  tasks:
+    - name: Installing NTP Service
+      apt:
+        name: ntp
+        state: present
+    - name:
+      service: 
+          name: httpd
+          enabled: yes

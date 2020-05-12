@@ -1,0 +1,35 @@
+---
+- name: Using items
+  hosts: managednodes
+  become: yes
+  tasks:
+    - name: Creating multiple users
+      user:
+        name: "{{ item }}"
+        comment: New user {{ item }} created
+        group: "{{ item }}"
+        state: absent
+      with_items:
+           - slow
+           - steady
+           - race3
+
+    - group:
+        name: "{{ item }}"
+        state: absent
+      with_items:
+        - slow
+        - steady
+        - race3
+
+    - name: Creating multiple files
+      file:
+        path: /home/{{ item }}/{{ item }}.conf
+        owner: "{{ item }}"
+        group: "{{ item }}"
+        mode: 0644
+        state: absent
+      with_items:
+        - slow
+        - steady
+        - race3

@@ -1,0 +1,14 @@
+---
+- name: Adding a new user
+  hosts: all
+  become: yes
+  tasks:
+    - name:
+      group: 
+         name: Ajiteshkumar
+         state: present
+    - name: Creating a new user
+      user:
+         name: Ajiteshkumar
+         comment: "John Doe"
+         group: Ajiteshkumar

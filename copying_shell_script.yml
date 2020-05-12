@@ -1,0 +1,22 @@
+---
+- name: Copying shell script
+  hosts: managednodes
+  become: yes
+  tasks:
+    - name: Copying shell script
+      copy:
+        src: /etc/ansible/shell/shell_script1.sh
+        dest: /home/ubuntu/shell_script1.sh
+        owner: ubuntu
+        group: ubuntu
+        mode: 0644
+      register: result
+    - name: running shell script
+      shell: /bin/bash /home/ubuntu/shell_script1.sh
+      register: shell_script
+    - name: debugging
+      debug:
+        var: result
+    - name: debugging two
+      debug:
+         var: shell_script

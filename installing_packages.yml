@@ -1,0 +1,20 @@
+---
+- name: Installing packagees
+  hosts: managednodes
+  become: yes
+  tasks:
+    - name: Installing packages on ubuntu
+      yum:
+       name: talk
+       state: latest
+      when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    - name: Installing packages on Redhat
+      apt:
+       update_cache: yes
+       name: talk
+       state: present
+      register: result
+      when: ansible_distribution ==  'Debian' or ansible_distribution == 'Ubuntu'
+    - name: debug
+      debug:
+         var: result

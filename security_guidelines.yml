@@ -1,0 +1,24 @@
+---
+- name: Enforcing Security guidelines
+  hosts: managed
+  become: yes
+
+  tasks:
+  - name: Installing latest software updates on RHEL machines
+    yum:
+       name: "*"
+       state: latest
+    register: rhel
+    when: "ansible_os_family == 'RedHat'"
+  - name: Installing latest software updates on Debian machines
+    apt:
+       update_cache: yes
+       upgrade: dist
+    register: ubuntu
+    when: "ansible_os_family == 'Debian'"
+  - name: debugging rhel
+    debug:
+       var: rhel
+  - name: debugging ubuntu
+    debug:
+       var: ubuntu

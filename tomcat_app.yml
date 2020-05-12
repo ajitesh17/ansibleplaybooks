@@ -1,0 +1,52 @@
+---
+- name: Installing app in tomcat
+  hosts: managed
+  become: yes
+  tasks:
+     - name: Deleting old tomcat installation
+       file:
+         path: /usr/local/tomcat
+         state: absent
+     
+     - name: Downloading Tomcat
+       get_url: 
+         url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.20/bin/apache-tomcat-8.0.20.tar.gz
+         dest: /tmp
+     
+     - name: Changing directory
+       command: chdir=/tmp ls
+       register: result
+
+     - name: Debugging changing directory
+       debug:
+          var: result
+
+     - name: Creating tomcat installation directory
+       file:
+         path: /usr/local/tomcat
+         state: directory
+         mode: 0755
+        
+     - name: Extracting downloaded tomcat archive
+       unarchive:
+         src: https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.20/bin/apache-tomcat-8.0.20.tar.gz
+         dest: /usr/local/tomcat
+         remote_src: yes
+         extra_opts: [--strip-components=1]
+  
+     - name: Copying tomcat users.xml
+       copy:
+         src: /etc/ansible/playbooks/tomcat-users.xml
+         dest: /usr/local/tomcat/conf
+
+     - name: Copying app to tomcat
+       copy:
+        src: /etc/ansible/playbooks/src/registeruser.war
+        dest: /usr/local/tomcat/webapps
+ 
+    
+     - name: Starting Tomcat
+       command: nohup /usr/local/tomcat/bin/startup.sh &
+
+     - name: Waiting for tomcat to come up on port 8080
+       wait_for: host=0.0.0.0 port=8080

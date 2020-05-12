@@ -1,0 +1,13 @@
+---
+- name: starting nfs service
+  hosts: managednodes
+  become: yes
+  tasks:
+    - name: NFS Service
+      service:
+        name: nfs
+        state: running
+      register: result
+    - name: debug
+      debug:
+       var: result
