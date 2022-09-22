@@ -8,3 +8,6 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible all -m ping
 ansible all -m ping
 ansible workernode -m ping
 ansible '*' -m ping
+ansible '*' -m ping -o - gives a condensed view or shortend out
+ansible workernode --list-hosts - listing hosts in a group
+
