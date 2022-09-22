@@ -20,3 +20,4 @@ ansible ~.*e --list-hosts
 
 ansible all -m command -a 'id' -o
 ansible all -m ping -o --become-user=ubuntu
+ansible all -m ping -vvvv
