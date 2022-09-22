@@ -16,3 +16,4 @@ comments in hosts file
 #172.31.87.218
 
 ansible all --list-hosts
+ansible ~.*e --list-hosts
