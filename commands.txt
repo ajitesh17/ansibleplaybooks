@@ -7,3 +7,4 @@ ansible --version
 ANSIBLE_HOST_KEY_CHECKING=False ansible all -m ping
 ansible all -m ping
 ansible workernode -m ping
+ansible '*' -m ping
