@@ -23,3 +23,4 @@ ansible all -m ping -o --become-user=ubuntu
 ansible all -m ping -vvvv
 ansible all -i /etc/ansible/hosts --list-hosts
 ansible all -i hosts --list-hosts - searches for hosts file in directory from where the command is executed from
+ansible debian -m ping -e 'ansible_port=22' -o
