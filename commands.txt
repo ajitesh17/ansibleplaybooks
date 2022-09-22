@@ -21,3 +21,5 @@ ansible ~.*e --list-hosts
 ansible all -m command -a 'id' -o
 ansible all -m ping -o --become-user=ubuntu
 ansible all -m ping -vvvv
+ansible all -i /etc/ansible/hosts --list-hosts
+ansible all -i hosts --list-hosts - searches for hosts file in directory from where the command is executed from
