@@ -5,3 +5,5 @@ ansible managednodes -m setup -a 'filter=ansible_all_ipv4_addresses'
 ansible all -m ping -v
 ansible --version
 ANSIBLE_HOST_KEY_CHECKING=False ansible all -m ping
+ansible all -m ping
+ansible workernode -m ping
