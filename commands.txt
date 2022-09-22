@@ -17,3 +17,6 @@ comments in hosts file
 
 ansible all --list-hosts
 ansible ~.*e --list-hosts
+
+ansible all -m command -a 'id' -o
+
