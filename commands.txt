@@ -11,3 +11,8 @@ ansible '*' -m ping
 ansible '*' -m ping -o - gives a condensed view or shortend out
 ansible workernode --list-hosts - listing hosts in a group
 
+comments in hosts file
+#[workernode]
+#172.31.87.218
+
+ansible all --list-hosts
